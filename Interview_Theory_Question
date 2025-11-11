@@ -1,0 +1,22 @@
+Difference OLAP and OLTP
+What is dimenstional and Fact tables
+How to optimize if i have bliion records while reading in pyspark
+repartition and map partition and foreach partition 
+what is the purpose of scd 
+How to optimize joining conditions
+i have two datasets if one dataset has actually data and another dataset has only metadata how to create a schema by using this dataset
+AQE
+difference between rdbms and nosql databases
+how do you manage lineage in ur project
+
+1.what is unity catalog in databricks
+2.what vaccum in databricks
+3.spark architeture 
+4.differnce between Map and flatMap
+5.when databricks notes slow 
+
+python 
+
+swallow copy and deep copy in python
+Decorate in python
+Generater in python
