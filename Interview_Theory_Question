@@ -1,4 +1,4 @@
-Explation about ACID properties
+Explation about ACID properties in delta lake?
 Difference OLAP and OLTP
 What is dimenstional and Fact tables
 How to optimize if i have bliion records while reading in pyspark
@@ -26,3 +26,86 @@ Generater in python
 ----------------->import in sql theroy related query<-----------
 
 derived table subqueries or in-line views subqueries
+
+
+
+                                              -------------------->Explantion about ACID properties in delta lake<---------------------------------------
+
+what is delta lake?
+Delta lake is storage layer built on top of data lakes(like s3,ADLS or HDFS) that adds ACID transactions,schema enforcement and time travel making big data reliable like a database
+
+1.Atomicity
+A Transcation is all-or-nothing - it either fully completes or fully fails.
+
+Example 
+lets say you are inserting 10 million rows into a delta table.
+if your job crashes after inserting 9 million rows,
+delta lake won't commit parital data.
+the table reamins exactly as before the job started.
+
+How  Delta lake ensueres this
+every operation in delta lake is recorded in a transaction log(_delta_log folder).
+A transcation is only committed when the json log file is successfully written
+if any failure occurs,no commit file is created --> no partial data.
+
+2.Consistency
+After a transcation, the table is always in valid and expectped state
+
+example
+if your table schema defines a column salary as integer, and you try to insert a string like "fifty thousand",delta lake rejects the write to maintain schema consistency
+
+How delta lake ensurances this
+Schema enforcement and schema evoluation feature
+
+Schema enforcement prevents invalid data types.
+schema evaolution(if ended allows) safe schema updates.
+
+Schema enforcement
+This is one of its core reliablity feature under the "Consistency" of ACID properties.
+
+What is Schema Enforcement?
+Schema Enforcement(also called schema validation)
+Delta lake ensures that all data written to table follows the tables defined schema 
+column names,data types, and nullability rules must match
+if your incoming data doesn't match the table schema,the write fails insted of corruputing the table
+
+
+All versions of the table are self-consistent snapshots
+
+
+3.isolation
+Multiple users can read and write to the same delta table without confilitcs.
+
+example
+you are running a query to read a table.
+at the same time,another user is updating that table
+you will still see a consistent snapshot of data(before the update), not half updated data.
+
+How Delat Lake ensures this
+Uses snapshot isolation via optimistic concurrency Control(OCC)
+a.writers read the current version(say v10)
+b.make changes locally
+c.try to commit as v11.
+d.if someone else already committed v11,delta checks for conflicts - if conflicts -->retry
+
+Readers always access a specfic version of the table(eg v10) so no interference.
+
+
+Durablity 
+
+once a transaction is commited, data is permanent and recoverable even if the system crashesh.
+
+example
+After a successful Merge or Update the data and metadata are saved to cloud/object storage. even if your spark cluster shuts down, the data is safe.
+
+How Delta lake ensures this
+
+Every committed transaction is written as a new json(and later compared to parquet) file in _delta_log/.
+you can time travel and restore any version
+
+select * from my_table version as of 5;
+
+
+
+
+
