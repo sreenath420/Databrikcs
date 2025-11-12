@@ -23,5 +23,4 @@ Generater in python
 
 ----------------->import in sql theroy related query<-----------
 
-derived subqueries
-
+derived table subqueries or in-line views subqueries
