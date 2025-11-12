@@ -1,3 +1,4 @@
+Explation about ACID properties
 Difference OLAP and OLTP
 What is dimenstional and Fact tables
 How to optimize if i have bliion records while reading in pyspark
@@ -14,6 +15,7 @@ how do you manage lineage in ur project
 3.spark architeture 
 4.differnce between Map and flatMap
 5.when databricks notes slow 
+
 
 python 
 
