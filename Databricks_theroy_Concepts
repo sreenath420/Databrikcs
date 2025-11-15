@@ -1,0 +1,74 @@
+-----------------------------------------> Views<------------------------------------------
+
+
+What Are Views in Databricks?
+
+A View in Databricks is a virtual table created from a SQL query.
+
+👉 It does NOT store data physically.
+👉 It only stores the SQL logic.
+👉 Every time you query the view, Databricks re-runs the underlying query
+
+Three Types of views available
+
+1.Temporary Views
+2.Global Temprorary Views
+3.Persistent View (Regular SQL View)
+
+--------------------1.Temporary View
+
+Exists only in your current Spark session
+
+Not visible to other users
+
+Automatically disappears when the session ends
+
+Example:
+Python
+df.createOrReplaceTempView("temp_sales")
+SQL
+
+CREATE OR REPLACE TEMP VIEW temp_sales AS
+SELECT * FROM sales WHERE amount > 1000;
+
+
+
+
+
+------------------2.Global Temporary View
+
+Exists in a special database called global_temp
+
+Visible across all notebooks in the same cluster/session
+
+Disappears when the cluster shuts down
+Ptyhon
+
+
+Python
+df.createOrReplaceGlobalTempView("global_sales")
+
+SQL
+SELECT * FROM global_temp.global_sales;
+
+------------------3.Persistent View (Regular SQL View)
+
+Stored in the Hive or Unity Catalog metastore
+
+Survives cluster restarts
+
+Visible to all users who have permissions
+
+Behaves like a permanent virtual table
+
+
+A Persisted View (also called Permanent View) is a SQL view that is stored permanently in the Metastore (Hive Metastore or Unity Catalog).
+
+👉 It does not store data
+👉 It stores only the SQL query definition
+👉 It is available to all users who have permissions
+👉 It survives cluster restarts
+
+
+CREATE VIEW high_value_sales AS
+SELECT * FROM sales WHERE amount > 5000;
