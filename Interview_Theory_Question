@@ -15,6 +15,8 @@ how do you manage lineage in ur project
 3.spark architeture 
 4.differnce between Map and flatMap
 5.when databricks notes slow 
+6.Type of cluster in databricks
+7.Drawbacks in while using broadcast join
 
 
 python 
