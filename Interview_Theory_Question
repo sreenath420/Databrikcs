@@ -115,9 +115,8 @@ target based on the ur target data we pull here
 cdc in sparksql or pyspark (for updating records from source and insert the new_records by comparsion target table) --> target_table
 
 
+missing records in pyspark or sql
 
-data=[[1,"a"],[2,"b"],[3,"c"]]
-schema=["id,"value"]
 
 df=spark.createDataFrame(data,schema)
 
