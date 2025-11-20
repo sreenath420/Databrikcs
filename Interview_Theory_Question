@@ -107,6 +107,38 @@ you can time travel and restore any version
 
 select * from my_table version as of 5;
 
+colunm
+1 million recrods desgine pipeline
+
+source_data ----> bronze layer(raw_data) from source table or data ----> silver layer filtering by using(updated records like date_column or unique columns) ---> golder_layer final 
+target based on the ur target data we pull here 
+cdc in sparksql or pyspark (for updating records from source and insert the new_records by comparsion target table) --> target_table
+
+
+
+data=[[1,"a"],[2,"b"],[3,"c"]]
+schema=["id,"value"]
+
+df=spark.createDataFrame(data,schema)
+
+df.isNull()
+
+select * 
+from
+( 
+select employee_name,dense_rank() over(order by salary desc) as rnk
+from employee) emp
+
+select * from emp where rnk=5
+
+mathed records table A not mathing from table B
+
+spark=df.join(df2,df.id=df2.id,"left-anti")
+
+select * from tabl 
+
+
+
 
 
 
