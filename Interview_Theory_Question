@@ -12,10 +12,18 @@ how do you manage lineage in ur project
 
 1.what is unity catalog in databricks
 2.what vaccum in databricks
+he VACUUM command in Databricks is used to remove unused data files from a Delta table that are no longer referenced by the transaction log and are older than a specified retention period (default is 7 days). 
+This helps reclaim storage and maintain performance. Please note that running VACUUM will remove the ability to time travel to versions older than the retention period, 
+and it is recommended to set the retention interval to at least 7 days to avoid issues with concurrent readers or writers.
+Syntax:-
+VACUUM table_name [RETAIN num HOURS];
+
 3.spark architeture 
 4.differnce between Map and flatMap
 5.when databricks notes slow 
 6.Type of cluster in databricks
+
+
 7.Drawbacks in while using broadcast join
 
 
@@ -132,9 +140,19 @@ select * from emp where rnk=5
 
 mathed records table A not mathing from table B
 
+Query:-
+
+SELECT * 
+FROM employee123 
+ANTI JOIN department 
+ON employee123.deptno = department.deptno;
+
+
+In PySpark, left anti join is a powerful operation used to retrieve records from the left DataFrame that do not have corresponding matches in the right DataFrame based on a specified condition.
+It is particularly useful when you want to find records in one dataset that do not have matching keys in another dataset.
+Ans:- By using left-anti join we can do this 
 spark=df.join(df2,df.id=df2.id,"left-anti")
 
-select * from tabl 
 
 
 
